@@ -78,17 +78,15 @@ class Sort {
         if (start >= end)
             return;
 
-        int left = start, right = end, pivot = arr[end];
-        while (left <= right) {
-            while (arr[left] < pivot)
+        int pivot = arr[end], left = start, right = end;
+        while (left < right) {
+            while (left < right && arr[left] < pivot)
                 left++;
-            while (arr[right] >= pivot)
+            while (left < right && arr[right] >= pivot)
                 right--;
-            if (left <= right) {
-                swap(arr, left, right);
-                left++;
-                right--;
-            }
+            if (left == right)
+                break;
+            swap(arr, left, right);
         }
 
         swap(arr, left, end);

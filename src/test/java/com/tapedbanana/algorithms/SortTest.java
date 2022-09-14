@@ -2,7 +2,10 @@ package com.tapedbanana.algorithms;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Consumer;
+import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -34,8 +37,26 @@ class SortTest {
     }
 
     void assertSortWorks(Consumer<int[]> sort) {
-        int[] arr = new int[] {8, 5, 1, 7, 3, 2, 4, 9, 0, 6};
-        sort.accept(arr);
-        assertThat(arr).isSorted();
+        int times = 10;
+        while (times-- > 0) {
+            int[] arr = shuffle(IntStream.range(0, 1000).toArray());
+            sort.accept(arr);
+            assertThat(arr).isSorted();
+        }
+    }
+
+    private static int[] shuffle(int[] arr) {
+        Random random = ThreadLocalRandom.current();
+        for (int i = arr.length - 1; i > 0; i--) {
+            int rnd = random.nextInt(i + 1);
+            swap(arr, rnd, i);
+        }
+        return arr;
+    }
+
+    private static void swap(int[] arr, int i1, int i2) {
+        int temp = arr[i1];
+        arr[i1] = arr[i2];
+        arr[i2] = temp;
     }
 }
