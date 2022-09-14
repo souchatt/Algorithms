@@ -23,8 +23,18 @@ class SortTest {
         assertSortWorks(Sort::insertionSort);
     }
 
+    @Test
+    void mergeSortWorks() {
+        assertSortWorks(Sort::mergeSort);
+    }
+
+    @Test
+    void quickSortWorks() {
+        assertSortWorks(Sort::quickSort);
+    }
+
     void assertSortWorks(Consumer<int[]> sort) {
-        int[] arr = new int[] {5, 1, 3, 2, 4};
+        int[] arr = new int[] {8, 5, 1, 7, 3, 2, 4, 9, 0, 6};
         sort.accept(arr);
         assertThat(arr).isSorted();
     }
