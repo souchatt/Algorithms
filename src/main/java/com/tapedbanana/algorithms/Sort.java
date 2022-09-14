@@ -84,9 +84,8 @@ class Sort {
                 left++;
             while (left < right && arr[right] >= pivot)
                 right--;
-            if (left == right)
-                break;
-            swap(arr, left, right);
+            if (left < right)
+                swap(arr, left, right);
         }
 
         swap(arr, left, end);
